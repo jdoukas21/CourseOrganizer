@@ -5,14 +5,37 @@ import java.util.ArrayList;
 public class Course
 {
 	private String name; 
-	private String section; 
+	private String number; 
 	private String instructor;
-	private String field; 
 	private String classroom;
 	private String time;
+	private String field; 
 	private Course[] preReqs;
 	private String[] books;
-	private ArrayList<String> assignments;
+	private ArrayList<Assignment> assignments = new ArrayList<Assignment>();
+	
+	public Course()
+	{
+		//no-arg constructor
+	}
+	
+	public Course(String courseName)
+	{
+		setName(courseName); 
+	}
+	
+	public Course(String courseName, String instructor)
+	{
+		setName(courseName);
+		setInstructor(instructor);
+	}
+	
+	public Course(String courseName, String instructor, String classroom)
+	{
+		setName(courseName);
+		setInstructor(instructor);
+		setClassroom(classroom);
+	}
 	
 	protected void setName(String name)
 	{
@@ -24,14 +47,14 @@ public class Course
 		return name;
 	}
 	
-	protected void setSection(String section)
+	protected void setNumber(String number)
 	{
-		this.section = section;
+		this.number = number;
 	}
 	
 	protected String getSection()
 	{
-		return section;
+		return number;
 	}
 	
 	protected void setInstructor(String instructor)
@@ -94,17 +117,24 @@ public class Course
 		return books;
 	}
 	
-	protected void addAssignment(String assignment)
+	protected void addAssignment(String title, String description, int dateAssigned, int dateFinished, boolean finished)
 	{
-		assignments.add(assignment);
+		if (!finished)
+		{
+			assignments.add(new Assignment(title, description, dateAssigned));
+		}
+		else
+		{
+			assignments.add(new Assignment(title, description, dateAssigned, dateFinished, finished));
+		}
 	}
 	
-	protected ArrayList<String> getAllAssignments()
+	protected ArrayList<Assignment> getAllAssignments()
 	{
 		return assignments;
 	}
 	
-	protected String getAssignment(int index)
+	protected Assignment getAssignment(int index)
 	{
 		return assignments.get(index);
 	}
@@ -112,9 +142,55 @@ public class Course
 	@Override
 	public String toString()
 	{
-		String fullString = "";
-		
+		String fullString =
+				"Course title: " + name
+				+"\nCourse number: " + number
+				+ "\nInstructor: " + instructor
+				+ "\nClassroom: " + classroom
+				+ "\nTime: " + time
+				+ "\nField: " + field; 
 		
 		return fullString;
+	}
+	
+	public String assignmentsToString()
+	{
+		String str = "";
+		
+		for (int n = 0; n < assignments.size(); n++)
+		{
+			if (n == assignments.size() - 1)
+			{
+				str += (n+1) + ". " + assignments.get(n).getTitle();
+			}
+			else
+			{
+				str += (n+1) + ". " + assignments.get(n).getTitle() + "\n";
+			}
+		}
+		
+		return str; 
+	}
+	
+	public String unfinishedAssignmentsToString()
+	{
+		String str = "";
+		
+		for (int n = 0; n < assignments.size(); n ++)
+		{
+			if (assignments.get(n).isFinished() ==  false)
+			{
+				if (n == assignments.size() - 1)
+				{
+					str += (n+1) + ". " + assignments.get(n).getTitle();
+				}
+				else 
+				{
+					str += (n+1) + ". " + assignments.get(n).getTitle() + "\n";
+				}
+			}
+		}
+		
+		return str; 
 	}
 }
