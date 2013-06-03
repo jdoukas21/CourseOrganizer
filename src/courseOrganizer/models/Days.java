@@ -1,8 +1,9 @@
 package courseOrganizer.models;
 
 import java.util.ArrayList;
+import java.io.Serializable;
 
-public class Days
+public class Days implements Serializable
 {
 	private String		dayOne;
 	private String		dayTwo;

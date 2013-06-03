@@ -14,6 +14,7 @@ import courseOrganizer.models.CourseList;
 import courseOrganizer.models.Days;
 import courseOrganizer.views.addCourseViews.AddDetailedCourseWindow;
 
+// Σχετίζεται με τις ενέργειες όταν πατηθεί το "ΟΚ" κατά την προσθήκη νέου μαθήματος.
 public class ADCWOkayButtonListener implements ActionListener
 {
 	private Object[] inputObjects;
@@ -39,30 +40,32 @@ public class ADCWOkayButtonListener implements ActionListener
 	*/
 	private CourseList courseList;
 	
+	private AddDetailedCourseWindow adcw; // Μεταβλητή JFrame.
 	
-	private AddDetailedCourseWindow adcw;
-	
+        //constructor
 	public ADCWOkayButtonListener(AddDetailedCourseWindow adcw, Object[] inputObjects, CourseList courseList)
 	{
-		this.inputObjects = inputObjects;
+                this.inputObjects = inputObjects;
 		this.adcw = adcw;
 		this.courseList = courseList;
-	}
+        }
 
+        // Αυτή η μέθοδος καθορίζει τις ενέργειες όταν πατηθεί το "ΟΚ"
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
-		JTextField titleField = (JTextField) inputObjects[0];
-		JSpinner beginTimeSpinner = (JSpinner) inputObjects[1];
+		JTextField titleField = (JTextField) inputObjects[0];   //Το στοιχείο inputObjects[0] είναι τύπου JTextField.
+		JSpinner beginTimeSpinner = (JSpinner) inputObjects[1]; //Το στοιχείο inputObjects[1] είναι τύπου JSpinner.
 		JTextField numberField = (JTextField) inputObjects[2];
 		JSpinner endTimeSpinner = (JSpinner) inputObjects[3];
 		JTextField instructorField = (JTextField) inputObjects[4];
 		JTextField FOSField = (JTextField) inputObjects[5];
 		JTextField classroomField = (JTextField) inputObjects[6];
 		JTextField semesterField = (JTextField) inputObjects[7];
-		JCheckBox[] checkBoxArray = (JCheckBox[]) inputObjects[8];
+		JCheckBox[] checkBoxArray = (JCheckBox[]) inputObjects[8]; //Το στοιχείο inputObjects[8] είναι τύπου JCheckBox.
 		
-		Course course =  new Course(titleField.getText());
+		// Δημιουργεί ένα νέο μάθημα
+                Course course =  new Course(titleField.getText());
 		
 		String time = getTime(beginTimeSpinner, endTimeSpinner);
 		course.setTime(time);
@@ -74,9 +77,11 @@ public class ADCWOkayButtonListener implements ActionListener
 		course.setSemester(semesterField.getText());
 		
 		course.setDays(determineSelectedDays(checkBoxArray, course));
-		
-		courseList.addCourse(course);
-		adcw.dispose();
+                
+                // Αποθηκεύει τα χαρακτηριστικά του μαθήματος στην επόμενη θέση της λίστας.
+                courseList.addCourse(course);
+		adcw.dispose(); // Αφού προστεθούν τα πεδία στη λίστα το παράθυρο κλείνει.
+                
 	}
 	
 	private String getTime(JSpinner beginTimeSpinner, JSpinner endTimeSpinner)

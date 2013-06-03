@@ -22,6 +22,7 @@ import courseOrganizer.models.Course;
 import courseOrganizer.models.CourseList;
 import courseOrganizer.utilities.Utilities;
 
+// Κλάση που εμφανίζει το μενού για δημιουργία simple μαθήματος.
 public class AddSimpleCourse extends JFrame
 {
 	private CourseList cl;
@@ -56,6 +57,7 @@ public class AddSimpleCourse extends JFrame
 		instructions.setFont(Fonts.DEFAULT_FONT);
 		
 		courseTitleField = new JTextField("General Biology");
+                // H μέθοδος prepareTextField της κλάσης Utilities καθορίζει τους listeners για το TextField.
 		Utilities.prepareTextField(courseTitleField, "General Biology");
 		
 		innerPanel.add(instructions);
@@ -90,6 +92,7 @@ public class AddSimpleCourse extends JFrame
 		
 		JButton cancelButton = new JButton("Cancel");
 		cancelButton.setFont(Fonts.DEFAULT_FONT);
+                // H μέθοδος prepareDisposeButton της κλάσης Utilities καθορίζει τους listeners για το Cancel button.
 		Utilities.prepareDisposeButton(cancelButton, this);
 		
 		panel.add(okayButton);
@@ -100,5 +103,4 @@ public class AddSimpleCourse extends JFrame
 		return panel;
 		
 	}
-	
 }

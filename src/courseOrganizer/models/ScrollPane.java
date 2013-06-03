@@ -3,12 +3,15 @@ package courseOrganizer.models;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.Font;
+import java.awt.Dimension;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS;
 
 import courseOrganizer.listeners.ButtonMouseListener;
 import courseOrganizer.listeners.CourseButtonMouseListener;
@@ -18,14 +21,20 @@ import courseOrganizer.models.notebook.Notebook;
 import courseOrganizer.models.notepad.NotePaper;
 import courseOrganizer.views.MainWindow;
 
+
 public class ScrollPane extends JScrollPane
 {
+    
 	private CourseList courseList;
 	private MainWindow parent;
+        private NotePaper notepaper;
+        
 	private String displayType = "courses";
 	private String textPaneText = "";
-	private NotePaper notePaper;
 	
+	
+        public ScrollPane(){}
+        
 	public ScrollPane(CourseList cl)
 	{
 		courseList = cl;
@@ -35,7 +44,7 @@ public class ScrollPane extends JScrollPane
 	{
 		courseList = cl;
 		this.parent = parent;
-		this.displayType = type;
+		this.displayType = type;  //Σε αυτή τη μεταβήτή αποθηκεύεται το mode
 		
 		if (displayType.equals("Courses"))
 		{
@@ -51,29 +60,26 @@ public class ScrollPane extends JScrollPane
 		}
 		else if (displayType.equals("Notepaper"))
 		{
-			//JLabel courseName = new JLabel(cl.get());
-			/*TextPane tp = new TextPane("Notes", courseList);
-			tp.setText(textPaneText);
-			textPaneText = tp.getText();
-			this.setViewportView(tp);*/
-			//displayNotes();
+                        //H displayNotes() καλείται από τη MainWindow
 		}
 
 		this.setVerticalScrollBarPolicy(VERTICAL_SCROLLBAR_ALWAYS);
 		this.setBorder(BorderFactory.createLineBorder(Color.BLUE, 1));
 		
 	}
-	
+        
 	private void displayNotebook()
 	{
 		// TODO Auto-generated method stub
 		this.setViewportView(new Notebook());
 	}
 
+        // Μέθοδος που εμφανίζει το mode "Courses" έπειτα από επιλογή του χρήστη από τη dropdown λίστα.
 	private void displayCourses()
 	{
-		JPanel coursePane = new JPanel(new GridLayout(courseList.size(), 1));
+		JPanel coursePane = new JPanel();
 		
+                //Αν δεν υπάρχουν μαθήματα προς εμφάνιση. H Μέθοδος isEmpty() βρίσκεται στην κλάση CourseList.
 		if (courseList.isEmpty())
 		{
 			coursePane.setLayout(new BorderLayout());
@@ -87,8 +93,18 @@ public class ScrollPane extends JScrollPane
 		{
 			for (int n = 0; n < courseList.size(); n ++)
 			{
+                                if (n == 0 || n == 1){
+                                    coursePane.setLayout(new GridLayout());
+                                }
+                                else{
+                                    coursePane.setLayout(new GridLayout(0,3,2,2)); // Ορίζει τη διάταξη σε 0 γραμμές, 3 στήλες και με 2 pixel κενό ανάμεσα.
+                                }
 				JButton button = new JButton();
 				button.setFont(Fonts.DEFAULT_FONT);
+                                /* Καλείται η get(n) της κλάσης CourseList η οποία επιστρέφει το αντικείμενο τύπου
+                                 * Course της ν-οστής θέσης. Έπειτά για το συγκεκριμένο αντικείμενο Course καλείται
+                                 * η isSimple() της κλάσης Course η οποία επιστρέφει αν συγκεκριμένο αντικείμενο είναι
+                                 * Simple ή Detailed. */
 				if (courseList.get(n).isSimple())
 				{
 					button.setText("<html><font size=\"6\"<B>" + courseList.get(n).getName() + "</B></font>");
@@ -106,6 +122,7 @@ public class ScrollPane extends JScrollPane
 				}
 				button.setBackground(Colors.LIGHT_GRAY);
 				button.setForeground(Color.BLACK);
+                                button.setPreferredSize(new Dimension(250,250)); //ρυθμίζει το μέγεθος του κουμπιού
 				button.setBorder(BorderFactory.createEtchedBorder());
 				button.addMouseListener(new CourseButtonMouseListener(button, courseList.get(n).getName(), Color.WHITE, Color.BLACK, parent, courseList));
 				coursePane.add(button);
@@ -115,6 +132,7 @@ public class ScrollPane extends JScrollPane
 		this.setViewportView(coursePane);
 	}
 	
+        // Μέθοδος που εμφανίζει το mode "Assignments" έπειτα από επιλογή του χρήστη από τη dropdown λίστα.
 	private void displayAssignments()
 	{
 		JPanel assignmentPane = new JPanel(new GridLayout(courseList.size(), 1));
@@ -154,11 +172,14 @@ public class ScrollPane extends JScrollPane
 		this.setViewportView(assignmentPane);
 	}
 	
-	public void displayNotes(String saveString)
+        // Μέθοδος που σχετίζεται με το mode "Notepaper".
+	public void displayNotes(String saveString/*, Font noteFont, Color noteColor*/)
 	{
-		notePaper = new NotePaper(this, saveString);
-		//this.setViewportView(new NotePaper(this));
-		this.setViewportView(notePaper);
+		notepaper = new NotePaper(this, saveString);
+		
+                // Το component notepaper που είναι JEditorPane θα εμφανιστεί με scroll. Πρέπει να μπει 
+                // εφόσον δε δηλώθηκε στον constructor.
+                this.setViewportView(notepaper); 
 	}
 	
 	public void setDisplayType(String displayType)
@@ -170,6 +191,10 @@ public class ScrollPane extends JScrollPane
 	{
 		return parent;
 	}
-	
-	
+        
+        public ScrollPane getScrollPane()
+        {
+                return this;
+        }
+		
 }

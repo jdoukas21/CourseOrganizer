@@ -1,26 +1,27 @@
 package courseOrganizer.models;
 
 import java.util.ArrayList;
+import java.io.Serializable;
 
-public class Course
+public class Course implements Serializable
 {
-	private String					name		= "Unknown";
-	private String					number		= "Unknown";
-	private String					instructor	= "Unknown";
-	private String					classroom	= "Unknown";
-	private String					fullTime 		= "Unknown";
-	private String					beginTime	= "Unknown";
-	private String					endTime		= "Unknown";
-	private String					field		= "Unknown";
-	private Days					days;
-	private Course[]				preReqs;
-	private String[]				books;
-	private ArrayList<Assignment>	assignments	= new ArrayList<Assignment>();
-	private String					semester	= "Unknown";
-
+	private String                      name            = "Unknown";
+	private String                      number          = "Unknown";
+	private String                      instructor      = "Unknown";
+	private String                      classroom       = "Unknown";
+	private String                      fullTime            = "Unknown";
+	private String                      beginTime       = "Unknown";
+	private String                      endTime         = "Unknown";
+	private String                      field           = "Unknown";
+	private Days                        days;
+	private Course[]                    preReqs;
+	private String[]                    books;
+	private ArrayList<Assignment>  assignments   = new ArrayList<Assignment>();
+	private String                      semester        = "Unknown";
+        
 	public Course()
 	{
-		// no-arg constructor
+		// no-arg constructor             
 	}
 
 	public Course(String courseName)
@@ -66,6 +67,7 @@ public class Course
 		this.name = name;
 	}
 
+        // Επιστρέφει το όνομα του μαθήματος.
 	public String getName()
 	{
 		return name;
@@ -143,6 +145,7 @@ public class Course
 
 	public boolean isSimple()
 	{
+                // Αν τα πεδία (εκτός από τον τίτλο) έχουν την τιμή Unknown τότε το αντικείμενο τύπου Course είναι Simple.
 		if (number.equals("Unknown") && instructor.equals("Unknown")
 				&& classroom.equals("Unknown") && fullTime.equals("Unknown")
 				&& field.equals("Unknown"))

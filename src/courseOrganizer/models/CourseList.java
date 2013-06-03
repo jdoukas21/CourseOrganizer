@@ -2,19 +2,18 @@ package courseOrganizer.models;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.io.Serializable;
 
-
-public class CourseList
-// this class holds all the information about the courses
+public class CourseList implements Serializable
 {
-	private ArrayList<Course>	courses		= new ArrayList<Course>();
-	private String				semester	= "Unknown";
-	private String				title		= "";
-	private String				date		= "";
+	private ArrayList<Course> courses = new ArrayList<Course>(); // Λίστα που αποθηκεύει αντεικίμενα τύπου Course.
+	private String semester	= "Unknown";
+	private String title = "";
+	private String date = "";
 
 	public CourseList()
 	{
-
+               
 	}
 	
 	public CourseList(ArrayList<Course> cl)
@@ -54,22 +53,22 @@ public class CourseList
 
 	public void addCourse(Course course)
 	{
-		courses.add(course);
-	}
+		courses.add(course); // Προσθέτει ένα αντικείμενο τύπου Course στο τέλος της λίστας.
+        }
 	
 	public int size()
 	{
-		return courses.size();
+		return courses.size(); // Επιστρέφει το μέγεθος της λίστας.
 	}
 
 	public Course get(int n)
 	{
-		return courses.get(n);
+		return courses.get(n); // Επιστρέφει το στοιχείο της n-οστής θέση.
 	}
 	
 	public void remove(int n)
 	{
-		courses.remove(n);
+		courses.remove(n); // Διαγράφει το στοιχείο από τη n-οστή θέση.
 	}
 	
 	public void remove(String courseName)
@@ -79,18 +78,20 @@ public class CourseList
 	
 	public boolean isEmpty()
 	{
-		return courses.size() == 0;
+		return courses.size() == 0; // Ελέγχει αν η λίστα έχει στοιχεία ή όχι.
 	}
 	
+        // Μέθοδος που ασχολείται με την ταξινόμηση των στοιχείων της λίστας courses.
 	public CourseList sort()
 	{
 		ArrayList<String> sortedTitles = new ArrayList<String>();
 		for (int n = 0; n < courses.size(); n++)
 		{
+                        // Προσθέτει κάθε στοιχείο της λίστας courses στη λίστα sortedTitles που είναι τύου String.
 			sortedTitles.add(courses.get(n).getName());
 		}
 
-		Collections.sort(sortedTitles);
+		Collections.sort(sortedTitles); // Ταξινομεί τη λίστα σε αύξουσα σειρά.
 
 		for (int n = 0; n < courses.size(); n++)
 		{

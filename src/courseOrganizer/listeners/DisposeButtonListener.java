@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 
+// Αφορά τη λειτουργικότητα του cancel κουμπιού
 public class DisposeButtonListener implements ActionListener
 {
 	private JFrame container; 
@@ -14,10 +15,11 @@ public class DisposeButtonListener implements ActionListener
 		container = c;
 	}
 	
+        // Εκτελείται μόλις πατηηθεί το cancel κουμπί.
 	@Override
 	public void actionPerformed(ActionEvent arg0)
 	{
-		container.dispose();
+		container.dispose(); // κλείνει το frame - παράθυρο.
 	}
 
 }

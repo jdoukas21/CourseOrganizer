@@ -12,16 +12,18 @@ import javax.swing.JTextField;
 
 import courseOrganizer.lookAndFeel.Fonts;
 
+// Γενική κλάση που καθορίζει τη συμπεριφορά για όλα τα κουμπιά της εφαρμογής.
+// Ρυθμίζει κυρίως την εμφάνισή τους, όπως το χρώμα όταν το ποντίκι είναι από πάνω.
 public class ButtonMouseListener implements MouseListener
 {
 	private JButton button;
 	private Color backgroundColor;
 	private Color fontColor;
-	private Color highlightBackground = Color.BLACK;
+	private Color highlightBackground = Color.lightGray;
 	private Color highlightForeground = Color.WHITE;
 	
 	private String type;
-	
+       	
 	public ButtonMouseListener(JButton button)
 	{
 		this.button = button;
@@ -41,16 +43,18 @@ public class ButtonMouseListener implements MouseListener
 	@Override
 	public void mouseClicked(MouseEvent e)
 	{
-		
+				
 	}
 	
+        // Ορίζει τις ενέργειες όταν το ποντίκι είναι πάνω από κάθε κουμπί.
 	@Override
 	public void mouseEntered(MouseEvent e)
 	{
-		button.setBackground(highlightBackground);
-		button.setForeground(highlightForeground);
+		button.setBackground(highlightBackground); // Αλλάζει το χρώμα του κουμπιού.
+		button.setForeground(highlightForeground); // Αλλάζει το χρώμα του κειμένου του κουμπιού.
 	}
 	
+        // Ορίζει τις ενέργειες όταν το ποντίκι δεν είναι πάνω από το κουμπί.
 	@Override
 	public void mouseExited(MouseEvent e)
 	{
@@ -58,7 +62,7 @@ public class ButtonMouseListener implements MouseListener
 		button.setForeground(fontColor);
 	}
 	
-	@Override
+      	@Override
 	public void mousePressed(MouseEvent e)
 	{
 		
@@ -67,7 +71,7 @@ public class ButtonMouseListener implements MouseListener
 	@Override
 	public void mouseReleased(MouseEvent e)
 	{
-		
-	}
+            
+        }
 
 }

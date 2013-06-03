@@ -21,7 +21,7 @@ public class TextFieldKeyListener implements KeyListener
 	@Override
 	public void keyPressed(KeyEvent arg0)
 	{
-		
+                // TODO Auto-generated method stub
 	}
 
 	@Override
@@ -34,7 +34,9 @@ public class TextFieldKeyListener implements KeyListener
 	@Override
 	public void keyTyped(KeyEvent arg0)
 	{
-		if (field.getText().equals(fieldText))
+		// Εκτελείται όταν το textFiled είναι επιλεγμένο και έχει την default τιμή.
+                // Δηλαδή όταν από ένα textField πατάμε το tab για να μεταβούμε σε ένα άλλο.
+                if (field.getText().equals(fieldText))
 		{
 			field.setText("");
 		}

@@ -26,6 +26,7 @@ import courseOrganizer.models.CourseList;
 import courseOrganizer.utilities.Utilities;
 import courseOrganizer.views.MainWindow;
 
+// Κλάση που εμφανίζει το μενού για δημιουργία detailed μαθήματος.
 public class AddDetailedCourseWindow extends JFrame
 {
 	//uses two panels with different layouts: one mainPanel has GridLayout with 4 rows, 4 columns. BottomPanel has GridLayout with 2 rows, 1 column. 
@@ -44,12 +45,11 @@ public class AddDetailedCourseWindow extends JFrame
 	
 	private Object[] inputObjects = new Object[9]; 
 	
-	
 	public AddDetailedCourseWindow(MainWindow container, CourseList cl, boolean editMode)
 	{
 		super("Add Course");
-		courseList = cl;
-		
+		courseList = cl;                
+                
 		this.editMode = editMode;
 		if (editMode)
 			super.setTitle("Edit Course");
@@ -59,7 +59,7 @@ public class AddDetailedCourseWindow extends JFrame
 		
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		
-		pack();
+		pack(); // Καθορίζει τις διαστάσεις του παραθύρου ώστε να ταιριάζει στις διαστάσεις των αντικειμένων.
 		this.setResizable(false);
 		this.setLocationRelativeTo(container);
 		if (!editMode)
@@ -68,8 +68,9 @@ public class AddDetailedCourseWindow extends JFrame
 		}
 	}
 	
-	public void setDefaultCourseAndShow(String courseName) //this method will set the fields to default values if a user is using this window
- 	{													  //to edit a course. 
+        //Αυτή η μέθοδος ορίζει τις τιμές στα πεδία σε default ή θα χρησιμοποιείται κατά το edit mode.
+	public void setDefaultCourseAndShow(String courseName) 
+ 	{													  
 		Course course = courseList.get(courseName);
 		this.courseName = courseName;
 		number = course.getNumber();
@@ -93,10 +94,9 @@ public class AddDetailedCourseWindow extends JFrame
 		JLabel instructions = new JLabel("<HTML>You may leave any of the fields blank except for the title field.</HTML>");
 		instructions.setFont(BOLD_FONT);
 		instructions.setBorder(BorderFactory.createLoweredSoftBevelBorder());
-		grandPanel.add(instructions, BorderLayout.NORTH);
-		
-		grandPanel.add(mainPanel(), BorderLayout.CENTER);
-		grandPanel.add(bottomPanel(), BorderLayout.SOUTH);
+		grandPanel.add(instructions, BorderLayout.NORTH); // Προσθέτει τις οδηγίες στην αρχή.
+              	grandPanel.add(mainPanel(), BorderLayout.CENTER); // Προσθέτει το mainPanel (εισαγωγή μαθήματος) στο κέντρο.
+		grandPanel.add(bottomPanel(), BorderLayout.SOUTH); // Προσθέτει το bottomPanel (εισαγωγή ημέρας) στο τέλος.
 		
 		this.add(grandPanel);
 		this.validate();
@@ -107,12 +107,13 @@ public class AddDetailedCourseWindow extends JFrame
 		
 		JPanel pane = new JPanel(new GridLayout(4, 4));
 		
-		//ROW 1
+		//Γραμμή 1 - Δύο JLabel, ένα JTextField και ένα JSpinner.
 		JLabel title = new JLabel("Title:");
 		title.setFont(Fonts.DEFAULT_FONT);
 		
 		JTextField titleField = new JTextField(courseName);
 		titleField.setFont(Fonts.ITALIC_FONT);
+                // H μέθοδος prepareTextField της κλάσης Utilities καθορίζει τους listeners για το TextField.
 		Utilities.prepareTextField(titleField, courseName);
 		inputObjects[0] = titleField;
 		
@@ -129,7 +130,7 @@ public class AddDetailedCourseWindow extends JFrame
 		beginTimeSpinner.setFont(Fonts.DEFAULT_FONT);
 		inputObjects[1] = beginTimeSpinner;
 		
-		//ROW 2
+		//Γραμμή 2 - Δύο JLabel, ένα JTextField και ένα JSpinner.
 		pane.add(title); pane.add(titleField); pane.add(startsAt); pane.add(beginTimeSpinner);
 		
 		JLabel numberLabel = new JLabel("Number:");
@@ -137,6 +138,7 @@ public class AddDetailedCourseWindow extends JFrame
 		
 		JTextField numberField = new JTextField(number);
 		numberField.setFont(Fonts.ITALIC_FONT);
+                // H μέθοδος prepareTextField της κλάσης Utilities καθορίζει τους listeners για το TextField.
 		Utilities.prepareTextField(numberField, number);
 		inputObjects[2] = numberField;
 		
@@ -152,7 +154,7 @@ public class AddDetailedCourseWindow extends JFrame
 		endTimeSpinner.setFont(Fonts.DEFAULT_FONT);
 		inputObjects[3] = endTimeSpinner;
 		
-		//ROW 3
+		//Γραμμή 3 - Δύο JLabel και δύο JTextField.
 		pane.add(numberLabel); pane.add(numberField); pane.add(endsAt); pane.add(endTimeSpinner);
 		
 		JLabel instructorLabel = new JLabel("Instructor:");
@@ -160,6 +162,7 @@ public class AddDetailedCourseWindow extends JFrame
 		
 		JTextField instructorField = new JTextField(instructor);
 		instructorField.setFont(Fonts.ITALIC_FONT);
+                // H μέθοδος prepareTextField της κλάσης Utilities καθορίζει τους listeners για το TextField.
 		Utilities.prepareTextField(instructorField, instructor);
 		inputObjects[4] = instructorField;
 		
@@ -168,10 +171,11 @@ public class AddDetailedCourseWindow extends JFrame
 		
 		JTextField FOSField = new JTextField(fieldOfStudy);
 		FOSField.setFont(Fonts.ITALIC_FONT);
+                // H μέθοδος prepareTextField της κλάσης Utilities καθορίζει τους listeners για το TextField.
 		Utilities.prepareTextField(FOSField, fieldOfStudy);
 		inputObjects[5] = FOSField;
 		
-		//ROW 4
+		//Γραμμή 4 - Δύο JLabel και δύο JTextField.
 		pane.add(instructorLabel); pane.add(instructorField); pane.add(fieldOfStudyLabel); pane.add(FOSField);
 		
 		JLabel classroomLabel = new JLabel("Classroom:");
@@ -179,6 +183,7 @@ public class AddDetailedCourseWindow extends JFrame
 		
 		JTextField classroomField = new JTextField(classroom);
 		classroomField.setFont(Fonts.ITALIC_FONT);
+                // H μέθοδος prepareTextField της κλάσης Utilities καθορίζει τους listeners για το TextField.
 		Utilities.prepareTextField(classroomField, classroom);
 		inputObjects[6] = classroomField; 
 		
@@ -187,6 +192,7 @@ public class AddDetailedCourseWindow extends JFrame
 		
 		JTextField semesterField = new JTextField(semester);
 		semesterField.setFont(Fonts.ITALIC_FONT);
+                // H μέθοδος prepareTextField της κλάσης Utilities καθορίζει τους listeners για το TextField.
 		Utilities.prepareTextField(semesterField, semester);
 		inputObjects[7] = semesterField;
 		
@@ -199,6 +205,7 @@ public class AddDetailedCourseWindow extends JFrame
 		
 	}
 	
+        // Δημιουργεί τα checkBoxes για τις ημέρες.
 	private JPanel bottomPanel()
 	{
 		JPanel labelPanel = new JPanel();
@@ -245,6 +252,7 @@ public class AddDetailedCourseWindow extends JFrame
 				{
 					for (int n = 0; n < checkBoxArray.length; n++)
 					{
+                                                // Αν το all είναι επιλεγμένο κάνει όλα τα checkBoxes επιλεγμένα.
 						checkBoxArray[n].setSelected(true);
 					}
 				}
@@ -269,15 +277,19 @@ public class AddDetailedCourseWindow extends JFrame
 		checkBoxPanel.add(sunday);
 		checkBoxPanel.add(all);
 		
+                // Δημιουργεί τα κουμπιά ΟΚ και Cancel.
 		JPanel buttonPanel = new JPanel(new GridLayout(1,2));
 		
 		JButton okayButton = new JButton("OK");
 		okayButton.setFont(Fonts.DEFAULT_FONT);
+                // Ορίζει για ακροατή συμβάντων το γενικό ButtonMouseListener που καθορίζει την εμφάνιση
+                // και τον ADCWOkayButtonListener που καθορίζει τις λεπτομέρειες.
 		okayButton.addMouseListener(new ButtonMouseListener(okayButton));
 		okayButton.addActionListener(new ADCWOkayButtonListener(this, inputObjects, courseList));
 		
 		JButton cancelButton = new JButton("Cancel");
 		cancelButton.setFont(Fonts.DEFAULT_FONT);
+                // H μέθοδος prepareDisposeButton της κλάσης Utilities καθορίζει τους listeners για το Cancel button.
 		Utilities.prepareDisposeButton(cancelButton, this);
 		
 		buttonPanel.add(okayButton);

@@ -19,12 +19,13 @@ public class TextFieldFocusListener implements FocusListener
 		this.fieldText = fieldText;
 	}
 	
+        // Αυτή η μέθοδος εκτελείται όταν κάνουμε focus στο παράθυρο. 
 	@Override
 	public void focusGained(FocusEvent arg0)
 	{
 		if (field.getFont() == Fonts.ITALIC_FONT)
 		{
-			field.selectAll();
+			field.selectAll(); // Επιλέγει το κείμενο των TextField.
 		}
 	}
 

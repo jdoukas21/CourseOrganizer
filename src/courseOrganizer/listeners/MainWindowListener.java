@@ -4,14 +4,17 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import javax.swing.JOptionPane;
 
 import courseOrganizer.views.MainWindow;
 
+/* Αυτή η κλάση "ακούει" τα συμβάντα του παραθύρου της εφαρμογής. Δηλαδή 
+ * ελέγχει την αλληλεπίδραση του χρήστη με το βασικό παράθυρο.*/
 public class MainWindowListener implements ComponentListener, WindowListener
 {
-	private MainWindow	window;
-	private boolean		firstOpened	= false;
-	private String		noteString = "";
+	private MainWindow      window;
+	private boolean         firstOpened     = false;
+	private String          noteString = "";
 
 	public MainWindowListener(MainWindow window)
 	{
@@ -19,6 +22,10 @@ public class MainWindowListener implements ComponentListener, WindowListener
 		window.setVisible(true);
 	}
 
+        /* Οι μέθοδοι που ακολουθούν επικαλύπτουν τις default των κλάσεων 
+         * ComponentListener και WindowListener επειδή θέλουμε να προσθέσουμε
+         * άλλη λειτουργικότητα.*/
+        
 	@Override
 	public void componentHidden(ComponentEvent arg0)
 	{
@@ -32,15 +39,17 @@ public class MainWindowListener implements ComponentListener, WindowListener
 
 	}
 
+        // Δολεύει όταν αλλάζει η διάσταση του παραθύρου
 	@Override
 	public void componentResized(ComponentEvent arg0)
-	{
+	{                     
 		if (firstOpened)
 		{
 			window.draw(false);
 		}
 	}
 
+        // Δουλεύει όταν πρωτο-ανοίγει το πρόγραμμα
 	@Override
 	public void componentShown(ComponentEvent arg0)
 	{
@@ -67,8 +76,7 @@ public class MainWindowListener implements ComponentListener, WindowListener
 	@Override
 	public void windowClosing(WindowEvent e)
 	{
-		// TODO Auto-generated method stub
-		//prompt if user would like to save current note
+                // Εκτελείται οταν κλείνει το παράθυο mainWindow
 	}
 
 	@Override

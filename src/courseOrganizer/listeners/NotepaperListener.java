@@ -5,6 +5,7 @@ import java.awt.event.KeyListener;
 
 import courseOrganizer.models.notepad.NotePaper;
 import courseOrganizer.views.MainWindow;
+import java.awt.Font;
 
 public class NotepaperListener implements KeyListener
 {

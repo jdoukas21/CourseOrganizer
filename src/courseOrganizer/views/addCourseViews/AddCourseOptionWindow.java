@@ -16,6 +16,7 @@ import courseOrganizer.listeners.ButtonMouseListener;
 import courseOrganizer.models.CourseList;
 import courseOrganizer.views.MainWindow;
 
+// Κλάση που εμφανίζει το μενού για δημιουργία νέου μαθήματος.
 public class AddCourseOptionWindow extends JFrame
 {
 	/**
@@ -30,35 +31,46 @@ public class AddCourseOptionWindow extends JFrame
 	public AddCourseOptionWindow(MainWindow c, CourseList cl)
 	{
 		super("Add Course");
-		
-		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                
+		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE); // Dispose on close: κλείνει το παράθυρο αφού εκτελέσει τις κατάλληλες ενέργειες.		courseList = cl;
 		courseList = cl;
-		this.container = c;
+                this.container = c;
 		
+                // Το mainPane περιέχει όλα τα κουμπιά.
 		JPanel mainPane = new JPanel();
-		mainPane.setLayout(new BorderLayout());
+		mainPane.setLayout(new BorderLayout()); // Το BorderLayout τοποθετεί τα components στις θέσεις NORTH, EAST, WEST, SOUTH κ.ο.κ.
 		
-		JPanel centerPane = new JPanel(new GridLayout(3, 1));
+                //Το centerPane περιέχει τα 3 κουμπιά.
+		JPanel centerPane = new JPanel(new GridLayout(3, 1)); // Η διάταξη των κουμπιών θα είναι 3 γραμμές και 1 στήλη.
 		
+                // Η ετικέτα με τις οδηγίες
 		JLabel instructions = new JLabel("<html><div style =\"text-align: center;\">Please choose the type of course"
 													+ "<BR>you would like to add.</div style></html>");
-		instructions.setBorder(BorderFactory.createEtchedBorder());
+		//instructions.setBorder(BorderFactory.createEtchedBorder()); // Ορίζει ένα πλαίσιο γύρω από το κείμενο με τις οδηγίες. Το αφαιρούμε γιατί φαίνεται σαν editable.
 		instructions.setFont(DEFAULT_FONT);
 		
+                //Toποθετεί το κείμενο με τις οδηγίες στο mainPane στη θέση NORTH.
 		mainPane.add(instructions, BorderLayout.NORTH);
 		
+                //Δημιουργεί το κουμπί Detailed Course.
 		JButton detailedCourse = new JButton("Detailed Course");
 		detailedCourse.setFont(DEFAULT_FONT);
+                // Ορίζει σαν ακροατή συμβάντων τη ButtonMouseListener η οποία είναι γενική κλάση που
+                // καθορίζει την εμφάνιση όλων των κουμπιών του προγράμματος.
 		detailedCourse.addMouseListener(new ButtonMouseListener(detailedCourse));
+                // Ορίζει και δεύτερο ακροατή συμβάντων που καθορίζει τις λεπτομέρειες
+                // που αφορούν το συγκεκριμένο κουμπί detailed Course.
 		detailedCourse.addActionListener(new ActionListener()
 		{
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
+                                // Όταν πατηθεί το detailed Course εμφανίζεται το αντίστοιχο παράθυρο.
 				new AddDetailedCourseWindow(container, courseList, false);
 			}
 		});
 		
+                // Δημιουργεί το κουμπί Simple Course.
 		JButton simpleCourse = new JButton("Simple Course");
 		simpleCourse.setFont(DEFAULT_FONT);
 		simpleCourse.addMouseListener(new ButtonMouseListener(simpleCourse));

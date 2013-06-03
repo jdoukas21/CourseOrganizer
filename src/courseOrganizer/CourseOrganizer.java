@@ -17,21 +17,25 @@ import courseOrganizer.models.CourseList;
 
 public class CourseOrganizer
 {
-	private CourseList			courseList = new CourseList();
-	private Course				currentCourse;
-	private Scanner				in				= new Scanner(System.in);
-	private File				lastSavedName	= new File(
-														(System.getProperty("user.dir"))
-																+ "\\lastSaved.txt");
+	private CourseList courseList = new CourseList(); // Δημιουργία αντικειμένου courseList που θα χρησιμοποιείται μόνο από αυτήν την κλάση
+	private Course currentCourse;
+	private Scanner in = new Scanner(System.in);
+	private File lastSavedName = new File(
+					(System.getProperty("user.dir"))
+					+ "\\lastSaved.txt");
 
 	public CourseList getCourseList()
 	{
-		return courseList;
+            /* Αυτή η μέθοδος καλείται από τη main. Είναι μία μέθοδος η οποία
+             * επιστρέφει ένα αντικείμενο τύπου CourseList. H courseList όταν ανοίγει το
+             * πρόγραμμα πρέπει να είναι κενή ώστε ο χρήστης να μπορεί να τη δημιουργήσει.
+             * Όμως όταν ο χρήστης θελήσει να ανοίξει ένα παλίο αρχείο. Πως δημιουργείται η courselist;*/
+                return courseList;
 	}
 
 	public void setCourseList(CourseList courseList)
 	{
-		this.courseList = courseList;
+		this.courseList = courseList; //To this αναφέρεται στη μεταβλητή courseList της κλάσης
 	}
 
 	public Course getCurrentCourse()
@@ -49,6 +53,8 @@ public class CourseOrganizer
 		courseList = new CourseList();
 	}
 
+        
+        // Οι παρακάτω μέθοδοι χρησιμοποιούναται για την console version της εφαρμογής
 	public void showHelpDialog()
 	{
 		System.out
@@ -218,6 +224,7 @@ public class CourseOrganizer
 				+ getCurrentDate('-') + ".rtf");
 		PrintWriter writer = new PrintWriter(outputFile);
 
+               
 		writer.println("CourseList Auto-Save");
 		writer.println(getCurrentDate('-'));
 		writer.println();
