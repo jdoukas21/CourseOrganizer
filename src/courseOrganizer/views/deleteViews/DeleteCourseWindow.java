@@ -22,7 +22,7 @@ import courseOrganizer.views.MainWindow;
 public class DeleteCourseWindow extends JFrame
 {
 	private CourseList cl;
-	private JComboBox<String> coursesBox;
+	private JComboBox coursesBox;
 	private JFrame thisFrame = this;
 	private MainWindow parent;
 	private JButton defaultButton;
@@ -63,7 +63,7 @@ public class DeleteCourseWindow extends JFrame
 			courseNames[n] = cl.get(n).getName();
 		}
 		
-		coursesBox = new JComboBox<String>(courseNames);
+		coursesBox = new JComboBox(courseNames);
 		coursesBox.setSelectedIndex(0);
 		coursesBox.setFont(Fonts.DEFAULT_FONT);
 		

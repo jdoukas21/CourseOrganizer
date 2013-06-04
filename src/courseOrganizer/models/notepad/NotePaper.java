@@ -53,7 +53,6 @@ public class NotePaper extends JEditorPane
                 
                 mainWindow = scrollPane.getParentWindow();
                 mainWindow.setNotePaper(this);
-                
                 editorpane = new EditorPane(mainWindow, this);
                 mainWindow.setEditorPane(editorpane);
                                 
@@ -79,7 +78,8 @@ public class NotePaper extends JEditorPane
 	@Override 
 	public void paintComponent(Graphics g)
 	{
-		BufferedImage notepaper = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+		//Αλλαγή του width με this.getSize().width και height με this.getSize().height
+        BufferedImage notepaper = new BufferedImage(this.getSize().width, this.getSize().height, BufferedImage.TYPE_INT_RGB);
 		Graphics graphics = notepaper.createGraphics();
 		
 		drawBackground((Graphics2D) graphics); // Καλεί τη drawBackground() για να δημιουργήσει το χρώμα φόντο.

@@ -36,7 +36,7 @@ public class MainWindow extends JFrame
 	private String view; //what the current view or mode is -- can be "Courses", "Assignments", "Notes", or "Notepad"
 	
         // Default values για το notepaper
-	private String saveString = "Giannis"; 
+	private String saveString = "Notes";
         private Font noteFont = new Font("Arial", Font.PLAIN, 20);
         private Color noteColor = Color.BLACK;
         
@@ -46,13 +46,12 @@ public class MainWindow extends JFrame
 		super("Course Organizer"); //Εμφανίζει το κείμενο στην πάνω αριστερή πλευρά του παραθύρου.
 		//COMPONENTS (in order of addition): topPane (MenuBar, view ComboBox), bigPane (left toolbar, main view)
 		
-		System.out.println(this.toString());
                 this.getContentPane().setLayout(new BorderLayout());
 		
 		courseList = cl;
 		view = "Courses"; // Default mode = Courses
                 		
-		this.setSize(new Dimension(600, 700)); //Ορίζει τις διαστάσεις όλου του εξωτερικού παραθύρου.
+		this.setSize(new Dimension(800, 700)); //Ορίζει τις διαστάσεις όλου του εξωτερικού παραθύρου.
 		
 		draw(true); //καλεί τη μέθοδο draw
 		
@@ -88,7 +87,7 @@ public class MainWindow extends JFrame
                 //Δημιουργία της dropdown λίστας. Αυτά είναι απλά η εικόνα. Δηλαδή τι θα εμφανίζεται σαν κείμενο.
 		String[] viewTypes = {"Courses", "Assignments", "Notepaper", "Notebook"};
 		
-		final JComboBox<String> viewComboBox = new JComboBox<String>(viewTypes);
+		final JComboBox viewComboBox = new JComboBox (viewTypes);
 		viewComboBox.setFont(Fonts.DEFAULT_FONT);
 		viewComboBox.setSelectedItem(selectedItem);
                 viewComboBox.setFont(new Font("Arial", Font.ITALIC, 15)); //Ορίζει πως θα φαίνονται τα στοιχεία της dropdown λίστας, γραμματοσειρά, μέγεθος, στυλ
@@ -125,8 +124,6 @@ public class MainWindow extends JFrame
                 //To JPanel "panel" περιέχει τα components "view:" και "dropdown λίστας"
 		panel.add(views); 
 		panel.add(viewComboBox);
-		//panel.setBorder(BorderFactory.createLineBorder(Color.ORANGE, 5)); // Ορίζει το χρώμα και το μέγεθος του border του "panel"
-                //panel.setBackground(Color.red); //Ορίζει το χρώμα φόντου
 		
 		panel.setMaximumSize(new Dimension(this.getMaximumSize().width, 50));
 		topPane.add(mb); //Προσθέτει το "μενού" στο "topPane"

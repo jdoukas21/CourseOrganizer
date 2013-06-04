@@ -93,7 +93,7 @@ public class AddDetailedCourseWindow extends JFrame
 		
 		JLabel instructions = new JLabel("<HTML>You may leave any of the fields blank except for the title field.</HTML>");
 		instructions.setFont(BOLD_FONT);
-		instructions.setBorder(BorderFactory.createLoweredSoftBevelBorder());
+		//instructions.setBorder(BorderFactory.createLoweredSoftBevelBorder());
 		grandPanel.add(instructions, BorderLayout.NORTH); // Προσθέτει τις οδηγίες στην αρχή.
               	grandPanel.add(mainPanel(), BorderLayout.CENTER); // Προσθέτει το mainPanel (εισαγωγή μαθήματος) στο κέντρο.
 		grandPanel.add(bottomPanel(), BorderLayout.SOUTH); // Προσθέτει το bottomPanel (εισαγωγή ημέρας) στο τέλος.
@@ -212,7 +212,7 @@ public class AddDetailedCourseWindow extends JFrame
 		
 		JLabel dayInstructions = new JLabel("Select the day(s) during which this class takes place:");
 		dayInstructions.setFont(BOLD_FONT);
-		dayInstructions.setBorder(BorderFactory.createLoweredSoftBevelBorder());
+		//dayInstructions.setBorder(BorderFactory.createLoweredSoftBevelBorder());
 		labelPanel.add(dayInstructions);
 		
 		JPanel checkBoxPanel = new JPanel(new GridLayout(2, 1));

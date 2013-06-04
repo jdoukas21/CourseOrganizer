@@ -8,8 +8,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.awt.FlowLayout;
-import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -18,11 +16,11 @@ import javax.swing.JCheckBox;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
-import javax.swing.JLabel;
 
 import courseOrganizer.listeners.EditorPaneWindowListener;
 import courseOrganizer.views.MainWindow;
-import javax.swing.border.TitledBorder;
+import javax.swing.ImageIcon;
+
 
 public class EditorPane extends JFrame{
     
@@ -44,8 +42,11 @@ public class EditorPane extends JFrame{
         private JComboBox sizeDropDown = new JComboBox(size);
         private JComboBox fontDropDown = new JComboBox(typeface);
         private JComboBox colorDropDown = new JComboBox(colorfaceString);
-        private JButton OKButton = new JButton("OK");
-        private JButton CancelButton = new JButton("Cancel");
+        
+        private ImageIcon OK_ICON = new ImageIcon("button_ok.png");
+        private ImageIcon CANCEL_ICON = new ImageIcon("button_x.png");
+        private JButton OKButton = new JButton("OK", OK_ICON);
+        private JButton CancelButton = new JButton("Cancel", CANCEL_ICON);
         
         private JPanel stylePanel = new JPanel(); 
         private JPanel fontPanel = new JPanel();
@@ -77,7 +78,7 @@ public class EditorPane extends JFrame{
                 // Οριζουμε την διάταξη των components.
                 this.setLayout(new GridLayout(4,1));
                 
-        // Ανάλογα την τελευταία αποθηκευμένη τιμή, προεπιλέγουμε τα αντίστοιχα πεδία-----------------------------
+        // Ανάλογα την τελευταία αποθηκευμένη τιμή, προεπιλέγουμε τ ααντίστοιχα πεδία-----------------------------
                 applyNotepaperFont = mainWindow.getNotepaperFont();
                 
                 // Αν το τελευταία αποθηκευμένο στυλ είναι bold τότε όταν ανοίξει ο Editor η επιλογή να είναι τικαρισμένη.
@@ -309,5 +310,12 @@ public class EditorPane extends JFrame{
                     JOptionPane.showMessageDialog(null, "You have to set the mode\n to Notepaper in order to\n use the Editor");
                 }
         }
-                           
+
+
+
+
+
+
+
+
 }
